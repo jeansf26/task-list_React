@@ -1,17 +1,16 @@
 import { ChevronRightIcon, TrashIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Button from "./Button.jsx";
 
 function tasks(props) {
   const navigate = useNavigate();
 
   function seeDetails(task) {
-    
     //Método seguro para navegar para a página de detalhes da tarefa
     const query = new URLSearchParams();
     query.set("title", task.title);
     query.set("description", task.description);
     navigate(`/task?${query.toString()}`);
-
   }
 
   return (
@@ -29,19 +28,16 @@ function tasks(props) {
               {task.title}
             </button>
 
-            <button
-              onClick={() => seeDetails(task)}
-              className="bg-slate-400 text-white p-2 rounded-md"
-            >
+            <Button onClick={() => seeDetails(task)}>
               <ChevronRightIcon />
-            </button>
+            </Button>
 
-            <button
+            <Button
               onClick={() => props.deleteTask(task.id)}
               className="bg-slate-400 text-white p-2 rounded-md"
             >
               <TrashIcon />
-            </button>
+            </Button>
           </li>
         );
       })}

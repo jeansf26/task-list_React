@@ -1,24 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Tasks from "./components/Tasks.jsx";
 import AddTask from "./components/AddTask.jsx";
 import { v4 } from "uuid";
 
 function App() {
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: "Estudar React",
-      description:
-        "Estudar React para aprender a criar aplicações web modernas",
-      completed: false,
+  const [tasks, setTasks] = useState(
+    JSON.parse(localStorage.getItem("tasks")) || []
+  );
+
+  useEffect(
+    function save() {
+      localStorage.setItem("tasks", JSON.stringify(tasks));
     },
-    {
-      id: 2,
-      title: "Estudar JavaScript",
-      description: "Estudar JavaScript para entender a base do React",
-      completed: false,
-    },
-  ]);
+    [tasks]
+  );
+
+  //API para buscar tarefas
+  // useEffect(() => {
+  //   async function fetchTasks() {
+  //     const response = await fetch(
+  //       "https://jsonplaceholder.typicode.com/todos?_limit=10",
+  //       {
+  //         method: "GET",
+  //       }
+  //     );
+  //     const data = await response.json();
+  //     setTasks(data);
+  //   }
+  //   fetchTasks();
+  // }, []);
 
   function onTaskClick(taskId) {
     const newtasks = tasks.map(function (task) {
@@ -52,7 +62,7 @@ function App() {
   }
 
   return (
-    <div className="w-screen h-screen bg-slate-500 flex justify-center p-6">
+    <div className="w-screen min-h-screen bg-slate-500 flex justify-center p-6">
       <div className="w-[500px] space-y-4">
         <h1 className="text-3xl text-slate-100 font-bold text-center">
           Gerenciador de tarefas
