@@ -4,10 +4,14 @@ import AddTask from "./components/AddTask.jsx";
 import { v4 } from "uuid";
 
 function App() {
+  //Estado para armazenar as tarefas
+  //Utiliza o localStorage para persistir os dados
   const [tasks, setTasks] = useState(
     JSON.parse(localStorage.getItem("tasks")) || []
   );
 
+  //useEffect funciona realizando função a cada alteração de uma lista
+  //Neste caso, salva as tarefas no localStorage sempre que houver uma alteração
   useEffect(
     function save() {
       localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -30,6 +34,9 @@ function App() {
   //   fetchTasks();
   // }, []);
 
+
+  //Muda o estado de uma tarefa para concluída ou não
+  //Recebe o ID da tarefa clicada e altera o estado dela
   function onTaskClick(taskId) {
     const newtasks = tasks.map(function (task) {
       if (task.id === taskId) {
@@ -44,6 +51,8 @@ function App() {
     setTasks(newtasks);
   }
 
+  //Deleta uma tarefa
+  //Recebe o ID da tarefa a ser deletada e filtra a lista de tarefas
   function deleteTask(taskId) {
     const newTasks = tasks.filter(function (task) {
       return task.id !== taskId;
@@ -51,6 +60,9 @@ function App() {
     setTasks(newTasks);
   }
 
+  //Adiciona uma nova tarefa
+  //Recebe o título e a descrição da tarefa, cria um novo objeto de tarefa e
+  //adiciona à lista de tarefas
   function addTask(title, description) {
     const newTask = {
       id: v4(),

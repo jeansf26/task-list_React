@@ -6,12 +6,14 @@ function AddTask(props) {
   const [description, setDescription] = useState("");
   return (
     <div className="space-y-4 p-6 bg-slate-200 rounded-md shadow flex flex-col">
+      {/*Ao mudar o valor dentro do campo de texto ele ja atualiza*/}
       <Input
         type="text"
         placeholder="Digite o titulo da tarefa"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
+      {/*Ao mudar o valor dentro do campo de texto ele ja atualiza*/}
       <Input
         type="text"
         placeholder="Digite a descrição da tarefa"
@@ -20,6 +22,8 @@ function AddTask(props) {
       />
       <button
         onClick={function enviar() {
+            //Verifica se os campos estão preenchidos
+          //Se não estiverem, exibe um alerta
           if (title.trim() === "" || description.trim() === "") {
             alert("Por favor, preencha todos os campos.");
             return;

@@ -2,8 +2,11 @@ import { ChevronLeftIcon } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 function TaskPage() {
+  //Hook para navegação entre páginas
   const navigate = useNavigate();
+  //Hook para acessar os parâmetros da URL
   const [searchParams] = useSearchParams();
+  //Obtém os parâmetros de título e descrição da URL
   const title = searchParams.get("title");
   const description = searchParams.get("description");
   return (

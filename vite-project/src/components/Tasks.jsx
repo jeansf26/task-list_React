@@ -3,8 +3,13 @@ import { useNavigate } from "react-router-dom";
 import Button from "./Button.jsx";
 
 function tasks(props) {
+
+    //Hook para navegação entre páginas
   const navigate = useNavigate();
 
+
+    //Método para ver detalhes da tarefa
+  //Navega para a página de detalhes da tarefa com os parâmetros de título e descrição
   function seeDetails(task) {
     //Método seguro para navegar para a página de detalhes da tarefa
     const query = new URLSearchParams();
@@ -14,6 +19,8 @@ function tasks(props) {
   }
 
   return (
+    //Lista de tarefas
+    //Renderiza cada tarefa como um item de lista com botões para ver detalhes e delet
     <ul className="space-y-4 p-6 bg-slate-200 rounded-md shadow">
       {props.tasks.map(function (task) {
         return (
